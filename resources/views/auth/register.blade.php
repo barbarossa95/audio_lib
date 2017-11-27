@@ -39,6 +39,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('invite') ? ' has-error' : '' }}">
+                            <label for="invite" class="col-md-4 control-label">Invite code</label>
+
+                            <div class="col-md-6">
+                                <input id="invite" type="text" class="form-control" name="invite" value="{{ old('invite') }}" required>
+
+                                @if ($errors->has('invite'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('invite') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
