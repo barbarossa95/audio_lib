@@ -18,9 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('music', 'MusicController');
+Route::resource('track', 'TrackController');
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
