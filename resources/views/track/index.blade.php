@@ -5,16 +5,18 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Yor music</div>
 
                 <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
+                    @if ($tracks->count() !== 0)
+                        @foreach ($tracks as $track)
+                            <div>
+                                {{ $track->original_filename }}
+                            </div>
+                        @endforeach
+                    @else
+                        <p>You have not tracks yet...</p>
                     @endif
-
-                    You are logged in!
                 </div>
             </div>
         </div>
