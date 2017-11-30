@@ -12,4 +12,17 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css/sass.css')
+    .stylus('resources/assets/stylus/app.styl', 'public/css/stylus.css')
+    .extract([
+        'jquery'])
+    .sourceMaps()
+    .version();
+
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            jquery: "jquery/src/jquery"
+        }
+    }
+});
