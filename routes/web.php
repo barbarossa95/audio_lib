@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('track', 'TrackController');
-
+Route::resource('track', 'TrackController', ['except' => [
+    'edit'
+]]);
 
 Auth::routes();
