@@ -25,7 +25,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        return 'here will be form for addind music';
+        return view('track.upload-modal-form');
     }
 
     /**
