@@ -15,7 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css/sass.css')
     .stylus('resources/assets/stylus/app.styl', 'public/css/stylus.css')
     .extract([
-        'jquery'])
+        'jquery',
+        'dropzone'])
     .sourceMaps()
     .version();
 
