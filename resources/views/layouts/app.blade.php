@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/sass.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ mix('css/stylus.css') }}" rel="stylesheet">
 </head>
 <body>

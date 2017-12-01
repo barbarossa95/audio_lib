@@ -13,7 +13,9 @@
                     </div>
                     <div class="pull-right">
                         <a href="#" class="js-upload-track btn btn-success">Upload</a>
-                        @include('layouts.partial.modal', ['id' => 'uploadModal'])
+                        @include('layouts.partial.modal', [
+                            'id' => 'uploadModal',
+                            'title' => 'Track upload' ])
                     </div>
                 </div>
 
