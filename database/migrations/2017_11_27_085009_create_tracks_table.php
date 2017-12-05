@@ -15,8 +15,8 @@ class CreateTracksTable extends Migration
     {
         Schema::create('tracks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('filename');
             $table->string('original_filename');
+            $table->string('url');
             $table->string('title')->nullable();
             $table->string('artist')->nullable();
             $table->string('album')->nullable();
@@ -33,6 +33,6 @@ class CreateTracksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('tracks');
+        Schema::dropIfExists('tracks');
     }
 }
