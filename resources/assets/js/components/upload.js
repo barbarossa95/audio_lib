@@ -1,42 +1,30 @@
 import Vue from 'vue'
 
 let $ = require('jquery');
+let tracksCount = 0;
 
-Vue.component('upload-form', {
-    data(){
-        return {
-            test: 'test text in input',
-        };
-    },
-
-    mounted() {
-        initDropzone();
-    },
-
-    watch: {
-        test: function (val, oldVal) {
-            console.log('value in input ' + val);
-        },
-    },
-
-});
 
 $(document).ready(() => {
+    let $modal = $('#uploadModal'),
+        $formContainer = $modal.find('.js-form-container');
     $('.js-upload-track').click((e) => {
         $(e.target).addClass('loading');
-        let $modal = $('#uploadModal'),
-            $formContainer = $modal.find('.js-form-container');
+
 
         let url = laroute.route('track.create');
         axios.get(url)
             .then((response) => {
                 $formContainer.html(response.data);
+                initDropzone();
                 $modal.modal("show");
-
-                new Vue({
-                    el: '#js-vue-upload'
-                });
             });
+    });
+
+    $modal.on('hidden.bs.modal', function () {
+        if (tracksCount>0) {
+            tracksCount;
+            document.location.reload();
+        }
     });
 });
 
@@ -53,7 +41,7 @@ function initDropzone() {
             this.on('success', trackUploaded);
             this.on('removedfile', trackRemoved);
             this.on('addedfile', function (file) {
-                let maxFiles = 5;
+                let maxFiles = 6;
 
                 if (typeof(this.files[maxFiles]) !== 'undefined'){
                     this.removeFile(this.files[maxFiles]);
@@ -72,10 +60,19 @@ function initDropzone() {
     });
 }
 
-function trackUploaded() {
-
+function trackUploaded(file, response) {
+    tracksCount++;
+    file.id = response.track.id;
 }
 
-function trackRemoved() {
+function trackRemoved(file) {
+    tracksCount--;
 
+    if (typeof (file.id) === 'undefined') {
+        return;
+    }
+
+    let url = laroute.route('track.destroy', {track : file.id});
+
+    axios.delete(url);
 }
