@@ -30,6 +30,6 @@ class CreateUserTrackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('user_track');
+        Schema::dropIfExists('user_track');
     }
 }
