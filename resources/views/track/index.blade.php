@@ -23,7 +23,7 @@
                     @if ($tracks->count() !== 0)
                         @foreach ($tracks as $track)
                             <div>
-                                {{ $track->original_filename }}
+                                <audio src="{{ $track->url }}"/> {{ $track->original_filename }}
                             </div>
                         @endforeach
                     @else
