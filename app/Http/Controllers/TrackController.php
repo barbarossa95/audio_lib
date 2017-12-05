@@ -36,7 +36,9 @@ class TrackController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->action('MusicController@index');
+        $track = Track::saveFromDropzone($request->track);
+        if (!$track) response()->json(['error' => 'Error while trakc upload'], 503);
+        return response()->json(['track' => $track], 200);
     }
 
     /**
@@ -51,17 +53,6 @@ class TrackController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return 'music edit form';
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,7 +61,7 @@ class TrackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect()->action('MusicController@show', compact('id'));
+        return 'TrackController@show';
     }
 
     /**
@@ -81,6 +72,11 @@ class TrackController extends Controller
      */
     public function destroy($id)
     {
-        return redirect()->action('MusicController@index');
+        $track = Track::find($id);
+        if (empty($track)) {
+            return response()->json(['error' => 'Track not found'], 404);
+        }
+        $track->deleteWithFile();
+        return response()->json(['track' => $track->id], 200);
     }
 }
