@@ -39,7 +39,7 @@ class Track extends Model
             $file->move($path, $filename);
             $track = self::create([
                 'original_filename' => $file->getClientOriginalName(),
-                'url' => url("$directory/$filename"),
+                'url' => "/$directory/$filename",
                 'title' => null,
                 'artist' => null,
                 'album' => null,
