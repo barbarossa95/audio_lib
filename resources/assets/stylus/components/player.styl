@@ -1,0 +1,47 @@
+.audiojs
+    height 300px
+    width 100%
+    background player-background
+
+    .play-pause
+        position relative
+        left 50%
+        top 82%
+        margin-left -25px
+        padding-top 10px
+        padding-left 12px
+        width 50px
+        height 50px
+        border solid darken(brand-success,50%) 1px
+        border-radius 50%
+        &:hover
+            background brand-success
+
+    .scrubber
+        top 45%
+        border-top none
+        margin 0
+        margin-left 10%
+        margin-right 10%
+
+        &
+        .progress
+        .loaded
+            position relative
+            left 0
+            width 80%
+            height 40px
+
+        .loaded
+            background #bebebe
+            margin-top -62px
+
+        .progress
+            background #8E8E8E
+
+    .time
+        position relative
+        left 50%
+        top 43%
+        margin-left -54px
+        border none
