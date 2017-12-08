@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 let $ = require('jquery');
 let tracksCount = 0;
 
@@ -9,6 +7,7 @@ $(document).ready(() => {
     $('.js-upload-track').click((e) => {
         let $btn = $(e.target);
         $btn.addClass('loading');
+        $btn.addClass('disabled');
 
         let url = laroute.route('track.create');
         axios.get(url)
@@ -16,6 +15,7 @@ $(document).ready(() => {
                 $formContainer.html(response.data);
                 initDropzone();
                 $btn.removeClass('loading');
+                $btn.removeClass('disabled');
                 $modal.modal("show");
             });
     });
