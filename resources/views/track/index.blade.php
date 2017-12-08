@@ -12,7 +12,11 @@
                         </h3>
                     </div>
                     <div class="pull-right">
-                        <a href="#" class="js-upload-track btn btn-success">Upload</a>
+                        <div class="js-upload-track btn btn-success">
+                            Upload
+                            <div class="loader"></div>
+                        </div>
+
                         @include('layouts.partial.modal', [
                             'id' => 'uploadModal',
                             'title' => 'Track upload' ])
