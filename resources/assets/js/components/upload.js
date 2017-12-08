@@ -3,19 +3,19 @@ import Vue from 'vue'
 let $ = require('jquery');
 let tracksCount = 0;
 
-
 $(document).ready(() => {
     let $modal = $('#uploadModal'),
         $formContainer = $modal.find('.js-form-container');
     $('.js-upload-track').click((e) => {
-        $(e.target).addClass('loading');
-
+        let $btn = $(e.target);
+        $btn.addClass('loading');
 
         let url = laroute.route('track.create');
         axios.get(url)
             .then((response) => {
                 $formContainer.html(response.data);
                 initDropzone();
+                $btn.removeClass('loading');
                 $modal.modal("show");
             });
     });
@@ -23,7 +23,7 @@ $(document).ready(() => {
     $modal.on('hidden.bs.modal', function () {
         if (tracksCount>0) {
             tracksCount;
-            document.location.reload();
+            document.location.reload();  // reload page if more than one track were uploaded
         }
     });
 });
