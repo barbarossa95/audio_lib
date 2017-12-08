@@ -25,16 +25,8 @@
 
                 <div class="panel-body">
                     @if ($tracks->count() !== 0)
-                        <audio src="{{ $tracks->first()->url }}"></audio>
-                        <ul class="playlist">
-                            @foreach ($tracks as $track)
-                                <li>
-                                    <a href="#"
-                                        class="{{ $loop->first ? 'playing' : '' }}"
-                                        data-src="{{ $track->url }}">{{ $track->original_filename }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @include('layouts.partial.player', [
+                            'tracks' => $tracks])
                     @else
                         <p>You have not tracks yet...</p>
                     @endif
