@@ -1,4 +1,4 @@
-require('./bootstrap');
+require('./vendor/bootstrap');
 
 window.Dropzone = require('dropzone');
 
