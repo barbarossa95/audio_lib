@@ -25,9 +25,9 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .extract([
         'jquery',
         'dropzone'])
-    .copy('resources/assets/js/audio.min.js', 'public/js/audio.min.js')
-    .copy('resources/assets/js/audiojs.swf', 'public/js/audiojs.swf')
-    .copy('resources/assets/js/player-graphics.gif', 'public/js/player-graphics.gif')
+    .copy('resources/assets/js/vendor/audio.min.js', 'public/js/audio.min.js')
+    .copy('resources/assets/js/vendor/audiojs.swf', 'public/js/audiojs.swf')
+    .copy('resources/assets/js/vendor/player-graphics.gif', 'public/js/player-graphics.gif')
     .sourceMaps()
     .version();
 
