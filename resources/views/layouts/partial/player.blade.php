@@ -2,7 +2,7 @@
     <div>
         <audio src="{{ $tracks->first()->url }}"></audio>
 
-        <ul class="playlist">
+        <ul ref="playlist" class="playlist">
             @foreach ($tracks as $track)
                 <li>
                     <a href="#"
