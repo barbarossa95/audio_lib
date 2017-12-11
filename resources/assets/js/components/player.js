@@ -1,10 +1,22 @@
 import Vue from 'vue'
 
 Vue.component('player', {
+    data: function (){
+        return {
+            as: null,
+            player: null
+        };
+    },
+
+    beforeMount() {
+        console.log("beforeMount");
+    },
+
     mounted () {
+        let that = this; // vue instance
         // Waiting audiojs library
         audiojs.events.ready(function() {
-            let $playlist = $('.playlist');
+            let $playlist = $(that.$refs.playlist);
 
             let as = audiojs.createAll({
                 trackEnded: function() {
@@ -16,14 +28,16 @@ Vue.component('player', {
                 },
                 createPlayer: {
                     markup: '\
-                  <div class="prev"></div>\
-                  <div class="play-pause"> \
-                    <p class="play"></p> \
-                    <p class="pause"></p> \
-                    <p class="loading"></p> \
-                    <p class="error"></p> \
+                  <div class="play-controls"> \
+                      <div @click="playPrev" class="play-prev" ></div>\
+                      <div class="play-pause"> \
+                        <p class="play"></p> \
+                        <p class="pause"></p> \
+                        <p class="loading"></p> \
+                        <p class="error"></p> \
+                      </div> \
+                      <div @click="playNext" class="play-next"></div>\
                   </div> \
-                  <div class="next"></div>\
                   <div class="scrubber"> \
                     <div class="progress"></div> \
                     <div class="loaded"></div> \
@@ -46,18 +60,35 @@ Vue.component('player', {
                 }
             });
 
-            let player = as[0];
+            that.player = as[0];
 
             $playlist.find('li').click(function(e) {
                 e.preventDefault();
                 $(this).addClass('playing').siblings().removeClass('playing');
-                player.load($('a', this).attr('data-src'));
-                player.play();
+                that.player.load($('a', this).attr('data-src'));
+                that.player.play();
             });
-
-            console.log('mounted');
-
         });
+    },
+
+    methods: {
+        playNext: function (event) {
+            console.log('playNext');
+            let $playlist = $(this.$refs.playlist);
+            this.player.pause();
+            let next = $playlist.find('li.playing').next();
+            if (!next.length) next = $playlist.find('li').first();
+            next.addClass('playing').siblings().removeClass('playing');
+            this.player.load($('a', next).attr('data-src'));
+            this.player.play();
+        },
+
+        playPrev: function (event) {
+            console.log('playPrev');
+            this.player.pause();
+        },
+
+
     }
 });
 
