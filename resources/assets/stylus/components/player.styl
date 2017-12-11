@@ -3,17 +3,30 @@
     width 100%
     background player-background
 
-    .play-pause
+    .play-controls
         position relative
+        display inline-block
+        margin-left -105px
+        margin-right auto
+        float left
         left 50%
         top 82%
-        margin-left -25px
+
+    .play-pause
+    .play-prev
+    .play-next
+        display inline-block
+        cursor pointer
         padding-top 10px
         padding-left 12px
         width 50px
         height 50px
         border solid darken(brand-success,50%) 1px
         border-radius 50%
+        margin 0px 10px
+        float left
+        overflow hidden
+
         &:hover
             background brand-success
 
