@@ -1,15 +1,18 @@
-<player inline-template id="js-vue-player" class='player' v-cloak>
+<player inline-template id="js-vue-player" class='player'>
     <div>
-        <audio src="{{ $tracks->first()->url }}"></audio>
-
-        <ul ref="playlist" class="playlist">
-            @foreach ($tracks as $track)
+        <div v-cloak>
+            <audio muted></audio>
+            <div class="player_contols">
+                <div v-on:click="playPrev"      class="player_contols-prev" ><span class="glyphicon glyphicon-backward"></span></div>
+                <div v-on:click="togglePlay"    class="player_contols-pause" ><span class="glyphicon glyphicon-play"></span></div>
+                <div v-on:click="playNext"      class="player_contols-next" ><span class="glyphicon glyphicon-forward"></span></div>
+            </div>
+            <ul ref="playlist" class="playlist" v-for="track in tracks">
                 <li>
-                    <a href="#"
-                        class="{{ $loop->first ? 'playing' : '' }}"
-                        data-src="{{ $track->url }}">{{ $track->original_filename }}</a>
+                    <a href="#" :src="track.url" >@{{ track.original_filename }}</a>
                 </li>
-            @endforeach
-        </ul>
+            </ul>
+        </div>
+        <div class="loader"></div>
     </div>
 </player>
