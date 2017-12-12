@@ -24,12 +24,7 @@
                 </div>
 
                 <div class="panel-body">
-                    @if ($tracks->count() !== 0)
-                        @include('layouts.partial.player', [
-                            'tracks' => $tracks])
-                    @else
-                        <p>You have not tracks yet...</p>
-                    @endif
+                    @include('layouts.partial.player')
                 </div>
             </div>
         </div>
