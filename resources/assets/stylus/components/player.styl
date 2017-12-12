@@ -9,19 +9,19 @@
         display none
 
     .scrubber
-        border none
         margin 0 10% 0 10%
+        border none
         background player-background
+        width 80%
 
-        &
         .progress
         .loaded
-            left 0
-            width 80%
             height 30px
+            width 100%
 
         .loaded
         .progress
+            left 0
             top 50%
             height 10px
             margin-top -5px
@@ -47,25 +47,42 @@
         margin-left -54px
         border none
 
+[v-cloak] {
+  display none
+}
 
+.player
+    &_contols
+        margin-left auto
+        margin-right auto
+        max-width 210px
 
+        &-prev
+        &-pause
+        &-next
+            display inline-block
+            cursor pointer
+            padding-top 13px
+            text-align center
+            width 50px
+            height 50px
+            border solid darken(brand-success,50%) 1px
+            border-radius 50%
+            margin 0px 10px
+            float left
+            overflow hidden
 
+            &:hover
+                background brand-success
 
-.play-pause
-.play-prev
-.play-next
-    display inline-block
-    cursor pointer
-    padding-top 10px
-    padding-left 12px
-    width 50px
-    height 50px
-    border solid darken(brand-success,50%) 1px
-    border-radius 50%
-    margin 0px 10px
-    float left
-    overflow hidden
-
-    &:hover
-        background brand-success
-
+    .loader
+        background #fff
+        background -moz-linear-gradient(left, brand-success 10%, rgba(255, 255, 255, 0) 42%)
+        background -webkit-linear-gradient(left, brand-success 10%, rgba(255, 255, 255, 0) 42%)
+        background -o-linear-gradient(left, brand-success 10%, rgba(255, 255, 255, 0) 42%)
+        background -ms-linear-gradient(left, brand-success 10%, rgba(255, 255, 255, 0) 42%)
+        background linear-gradient(to right, brand-success 10%, rgba(255, 255, 255, 0) 42%)
+        &:before
+            background: rgba(0,0,0,0);
+        &:after
+            background #fff
