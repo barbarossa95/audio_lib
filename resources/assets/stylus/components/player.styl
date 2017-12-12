@@ -1,56 +1,44 @@
 .audiojs
-    height 300px
+    height 30px
     width 100%
     background player-background
-
-    .play-controls
-        position relative
-        display inline-block
-        margin-left -105px
-        margin-right auto
-        float left
-        left 50%
-        top 82%
+    border none
+    box-shadow none
 
     .play-pause
-    .play-prev
-    .play-next
-        display inline-block
-        cursor pointer
-        padding-top 10px
-        padding-left 12px
-        width 50px
-        height 50px
-        border solid darken(brand-success,50%) 1px
-        border-radius 50%
-        margin 0px 10px
-        float left
-        overflow hidden
-
-        &:hover
-            background brand-success
+        display none
 
     .scrubber
-        top 45%
-        border-top none
-        margin 0
-        margin-left 10%
-        margin-right 10%
+        border none
+        margin 0 10% 0 10%
+        background player-background
 
         &
         .progress
         .loaded
-            position relative
             left 0
             width 80%
-            height 40px
+            height 30px
 
         .loaded
-            background #bebebe
-            margin-top -62px
+        .progress
+            top 50%
+            height 10px
+            margin-top -5px
 
         .progress
-            background #8E8E8E
+            background progress-background
+            &:after
+                width 5px
+                height 10px
+                border solid darken(brand-success, 50%) 1px
+                background brand-success
+                content ""
+                float right
+
+        .loaded
+            background loaded-background
+
 
     .time
         position relative
@@ -58,3 +46,26 @@
         top 43%
         margin-left -54px
         border none
+
+
+
+
+
+.play-pause
+.play-prev
+.play-next
+    display inline-block
+    cursor pointer
+    padding-top 10px
+    padding-left 12px
+    width 50px
+    height 50px
+    border solid darken(brand-success,50%) 1px
+    border-radius 50%
+    margin 0px 10px
+    float left
+    overflow hidden
+
+    &:hover
+        background brand-success
+
