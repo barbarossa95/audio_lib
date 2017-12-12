@@ -36,6 +36,12 @@ Vue.component('player', {
         playPrev: function (event) {
             this.player.pause();
         },
+
+        togglePlay: function (event) {
+            /*this.player.playing
+                ? this.player.pause()
+                : this.player.play();*/
+        }
     }
 });
 
