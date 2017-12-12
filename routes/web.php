@@ -18,8 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tracks', 'TrackController@getTracksView');
+
 Route::resource('track', 'TrackController', ['except' => [
     'edit'
 ]]);
+
+
 
 Auth::routes();
