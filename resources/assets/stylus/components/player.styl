@@ -52,17 +52,50 @@
 }
 
 .player
-    &_contols
-        margin-left auto
-        margin-right auto
-        max-width 210px
+    &_time
+        &-played
+            float left
+        &-duration
+            float right
+
+    &_controls
+        &-center
+            margin-left auto
+            margin-right auto
+            min-width 210px
+            max-width 210px
+
+        &-left
+            float left
+        &-right
+            float right
 
         &-prev
         &-pause
         &-next
-            display inline-block
+        &-mute
+            &:hover
+                background: brand-success
+                background: -webkit-radial-gradient(rgba(0,0,0,0), brand-success)
+                background: -o-radial-gradient(rgba(0,0,0,0), brand-success)
+                background: -moz-radial-gradient(rgba(0,0,0,0), brand-success)
+                background: radial-gradient(rgba(0,0,0,0), brand-success)
+
+        &-shuffle
+        &-repeat
+            &:hover
+                background: brand-success
+                background: -webkit-radial-gradient(brand-success, rgba(0,0,0,0))
+                background: -o-radial-gradient(brand-success, rgba(0,0,0,0))
+                background: -moz-radial-gradient(brand-success, rgba(0,0,0,0))
+                background: radial-gradient(brand-success, rgba(0,0,0,0))
+
+        &-prev
+        &-pause
+        &-next
+            font-size 24px
             cursor pointer
-            padding-top 13px
+            padding-top 8px
             text-align center
             width 50px
             height 50px
@@ -70,10 +103,41 @@
             border-radius 50%
             margin 0px 10px
             float left
-            overflow hidden
 
-            &:hover
-                background brand-success
+        &-mute
+            cursor pointer
+            padding-top 4px
+            text-align center
+            width 30px
+            height 30px
+            border solid darken(brand-success,50%) 1px
+            border-radius 50%
+            margin 10px 10px
+
+        &-shuffle
+        &-repeat
+            cursor pointer
+            padding-top 4px
+            text-align center
+            width 30px
+            height 30px
+            border none
+            border-radius 50%
+            margin 10px 10px
+
+        @media (max-width: 320px)
+            &-left
+                left 0
+            &-right
+                right 100%
+            &-left
+            &-right
+                float none
+                position relative
+                color red
+
+
+
 
     .loader
         background #fff
