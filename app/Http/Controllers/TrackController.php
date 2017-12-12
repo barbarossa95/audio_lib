@@ -7,6 +7,11 @@ use App\Models\Track;
 
 class TrackController extends Controller
 {
+    public function getTracksView()
+    {
+        return view('track.index', compact('tracks'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class TrackController extends Controller
     public function index()
     {
         $tracks = Track::all();
-        return view('track.index', compact('tracks'));
+        return $tracks;
     }
 
     /**
