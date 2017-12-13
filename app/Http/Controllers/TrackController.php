@@ -9,7 +9,7 @@ class TrackController extends Controller
 {
     public function getTracksView()
     {
-        return view('track.index', compact('tracks'));
+        return view('track.index');
     }
 
     /**
@@ -17,8 +17,9 @@ class TrackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        dd($request->user());
         $tracks = Track::all();
         return $tracks;
     }

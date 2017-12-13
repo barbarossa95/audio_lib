@@ -18,11 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tracks', 'TrackController@getTracksView');
+Route::middleware('auth')->group(function () {
 
-Route::resource('track', 'TrackController', ['except' => [
-    'edit'
-]]);
+    Route::get('/tracks', 'TrackController@getTracksView');
+
+    Route::resource('track', 'TrackController', ['except' => [
+        'edit'
+    ]]);
+});
 
 
 
