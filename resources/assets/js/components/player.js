@@ -5,14 +5,13 @@ Vue.component('player', {
         return {
             as: null,
             player: null,
-            tracks: [],
+            track: null,
             isShufle: false,
             isRepeat: false,
         };
     },
 
     mounted () {
-        console.log("mounted");
         let that = this; // vue instance
 
         audiojs.events.ready(function() {
@@ -38,21 +37,15 @@ Vue.component('player', {
                     duration.innerHTML = (c < 10 ? "0" : "") + c + ":" + (d < 10 ? "0" : "") + d
                 },
             });
+            // init player
             that.player = as[0];
 
-            //test puporses
-            that.player.load("/uploads/tracks/fa9d55a067eafe16d022d05c7a3654f4.mp3");
-
+            // disable the loader
             that.$refs.loader.style.display = "none";
         });
     },
 
     methods: {
-        playTrack: function(trackSrc) {
-            this.player.load(trackSrc);
-            this.player.play();
-        },
-
         playNext: function (event) {
             this.player.pause();
         },
@@ -95,6 +88,12 @@ Vue.component('player', {
                 this.$refs.mute.classList.remove("glyphicon-volume-off");
                 this.$refs.mute.classList.add("glyphicon-volume-up");
             }
+        },
+
+        trackSelected: function (track) {
+            this.track = track;
+            this.player.load(track.url);
+            this.player.play();
         }
     }
 });
