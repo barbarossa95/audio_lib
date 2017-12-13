@@ -6,6 +6,8 @@ Vue.component('player', {
             as: null,
             player: null,
             tracks: [],
+            isShufle: false,
+            isRepeat: false,
         };
     },
 
@@ -72,11 +74,15 @@ Vue.component('player', {
         },
 
         toggleShuffle: function (event) {
-
+            if (this.isShufle) this.$refs.shuffle.parentNode.classList.remove('active');
+            else this.$refs.shuffle.parentNode.classList.add('active');
+            this.isShufle = !this.isShufle;
         },
 
         toggleRepeat: function (event) {
-
+            if (this.isRepeat) this.$refs.repeat.parentNode.classList.remove('active');
+            else this.$refs.repeat.parentNode.classList.add('active');
+            this.isRepeat = !this.isRepeat;
         },
 
         toggleMuted: function (event) {
