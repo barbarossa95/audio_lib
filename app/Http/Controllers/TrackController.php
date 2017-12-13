@@ -19,7 +19,6 @@ class TrackController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->user());
         $tracks = Track::all();
         return $tracks;
     }
