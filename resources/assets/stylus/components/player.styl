@@ -55,6 +55,11 @@
             float right
 
     &_controls
+        height 50px
+        margin-bottom 10px
+        @media (max-width: 490px)
+            height 90px
+            margin-bottom 10px
         &-center
             width 100%
             position absolute
@@ -65,7 +70,6 @@
             position relative
             @media (max-width: 490px)
                 top 50px
-                height 90px
 
         &-left
             float left
