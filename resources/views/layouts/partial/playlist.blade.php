@@ -1,10 +1,8 @@
-<playlist inline-template id="js-vue-playlist" class='playlist'>
+<playlist inline-template id="js-vue-playlist" class='playlist' v-on:track-selected="trackSelected">
     <div>
         <div v-cloak>
-            <ul ref="playlist" class="playlist" v-for="track in tracks">
-                <li>
-                    <a href="#" :src="track.url" >@{{ track.original_filename }}</a>
-                </li>
+            <ul ref="playlist" v-for="track in tracks">
+                <li class="playlist_item" v-on:click="selectTrack($event, track)">@{{ track.original_filename }}</li>
             </ul>
         </div>
         <div ref="loader" class="loader"></div>
@@ -12,5 +10,4 @@
             <span ref="error"></span>
         </div>
     </div>
-
 </playlist>
