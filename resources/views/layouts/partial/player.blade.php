@@ -24,11 +24,6 @@
                 </div>
             </div>
             @include('layouts.partial.playlist')
-            <ul ref="playlist" class="playlist" v-for="track in tracks">
-                <li>
-                    <a href="#" :src="track.url" >@{{ track.original_filename }}</a>
-                </li>
-            </ul>
         </div>
         <div ref="loader" class="loader"></div>
     </div>
