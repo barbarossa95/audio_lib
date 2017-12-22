@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/tracks', 'TrackController@getTracksView');
 
-    Route::resource('track', 'TrackController', ['except' => [
+    Route::middleware('ajax')->resource('track', 'TrackController', ['except' => [
         'edit'
     ]]);
 });
