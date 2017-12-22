@@ -46,7 +46,7 @@ Vue.component('player', {
     },
 
     watch: {
-        // whenever track changes, this function will run
+        // whenever track changes, this function will start palying it
         track: function (newTrack) {
             this.player.pause();
             this.player.load(newTrack.url);
@@ -61,7 +61,7 @@ Vue.component('player', {
         },
 
         playPrev: function (event) {
-            this.track = this.$refs.playlist.getNext();
+            this.track = this.$refs.playlist.getPrev();
         },
 
         togglePlay: function (event) {
@@ -91,7 +91,7 @@ Vue.component('player', {
         toggleMuted: function (event) {
             if (this.player.element.volume != 0) {
                 this.player.setVolume(0);
-                this.$refs.mute.classList.remove("glyphicon-volume-up");
+                this.$refs.mute.classList.remove("glyphicon-volume-up"); // TODO move to markup of the component
                 this.$refs.mute.classList.add("glyphicon-volume-off");
             } else {
                 this.player.setVolume(1);
