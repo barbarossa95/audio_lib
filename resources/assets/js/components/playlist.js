@@ -37,7 +37,14 @@ Vue.component('playlist', {
             if (this.currentTrackIndex <= 0) this.currentTrackIndex = this.tracks.length-1;
             else this.currentTrackIndex--;
             return this.tracks[this.currentTrackIndex];
-        }
+        },
 
+        shuffle: function () {
+            this.tracks = _.shuffle(this.tracks);
+        },
+
+        unshuffle: function () {
+            this.tracks = _.sortBy(this.tracks, (o) => o.created_at);
+        },
     }
 });
