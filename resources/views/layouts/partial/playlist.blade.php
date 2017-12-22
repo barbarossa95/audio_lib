@@ -1,4 +1,4 @@
-<playlist inline-template id="js-vue-playlist" class='playlist' v-on:track-selected="trackSelected">
+<playlist inline-template id="js-vue-playlist" class='playlist' v-on:track-selected="trackSelected" ref="{{ $ref }}">
     <div>
         <div v-cloak>
             <ul ref="playlist" v-for="track in tracks">
