@@ -4,6 +4,8 @@ Vue.component('playlist', {
     data: function (){
         return {
             tracks: [],
+            currentTrack: null,
+            currentTrackIndex: 0,
         };
     },
 
@@ -20,15 +22,22 @@ Vue.component('playlist', {
     },
 
     methods: {
-        selectTrack: function(event, track) {
+        selectTrack: function (event, track) {
+            this.currentTrack = track;
             this.$emit('track-selected', track);
         },
+
+        getNext: function () {
+            if (this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
+            else this.currentTrackIndex++;
+            return this.tracks[this.currentTrackIndex];
+        },
+
+        getPrev: function () {
+            if (this.currentTrackIndex <= 0) this.currentTrackIndex = this.tracks.length-1;
+            else this.currentTrackIndex--;
+            return this.tracks[this.currentTrackIndex];
+        }
+
     }
 });
-
-/**
- * init Vue at the element
- */
-// document.getElementById('js-vue-playlist') && new Vue({
-//     el: '#js-vue-playlist'
-// })
