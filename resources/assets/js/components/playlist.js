@@ -22,7 +22,8 @@ Vue.component('playlist', {
     },
 
     methods: {
-        selectTrack: function (event, track) {
+        selectTrack: function (event, index, track) {
+            this.currentTrackIndex = index;
             this.currentTrack = track;
             this.$emit('track-selected', track);
         },
