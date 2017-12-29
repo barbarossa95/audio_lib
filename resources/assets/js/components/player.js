@@ -71,7 +71,8 @@ Vue.component('player', {
         },
 
         toggleShuffle: function (event) {
-            this.$refs
+            if (this.isShufle) this.$refs.playlist.unshuffle();
+            else this.$refs.playlist.shuffle();
             this.isShufle = !this.isShufle;
         },
 
