@@ -5,9 +5,10 @@ Vue.component('playlist', {
         return {
             tracks: [],
             currentTrack: null,
-            currentTrackIndex: 0,
+            currentTrackIndex: -1,
         };
     },
+    props: ['isPlaying'],
 
     mounted () {
         let url = laroute.route('track.index');
@@ -29,14 +30,12 @@ Vue.component('playlist', {
         },
 
         getNext: function () {
-            if (this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
-            else this.currentTrackIndex++;
+            if (++this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
             return this.tracks[this.currentTrackIndex];
         },
 
         getPrev: function () {
-            if (this.currentTrackIndex <= 0) this.currentTrackIndex = this.tracks.length-1;
-            else this.currentTrackIndex--;
+            if (--this.currentTrackIndex < 0) this.currentTrackIndex = this.tracks.length-1;
             return this.tracks[this.currentTrackIndex];
         },
 
