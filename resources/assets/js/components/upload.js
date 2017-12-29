@@ -1,5 +1,10 @@
+import Vue from 'vue'
+import { EventBus } from './event-bus.js'
+
 let $ = require('jquery');
 let tracksCount = 0;
+
+var bus = new Vue();
 
 $(document).ready(() => {
     let $modal = $('#uploadModal'),
@@ -20,12 +25,8 @@ $(document).ready(() => {
             });
     });
 
-    $modal.on('hidden.bs.modal', function () {
-        if (tracksCount>0) {
-            tracksCount;
-            document.location.reload();  // reload page if more than one track were uploaded
-        }
-    });
+    // $modal.on('hidden.bs.modal', function () {
+    // });
 });
 
 function initDropzone() {
@@ -63,6 +64,7 @@ function initDropzone() {
 function trackUploaded(file, response) {
     tracksCount++;
     file.id = response.track.id;
+    EventBus.$emit("track-uploaded", response.track);
 }
 
 function trackRemoved(file) {
@@ -74,5 +76,8 @@ function trackRemoved(file) {
 
     let url = laroute.route('track.destroy', {track : file.id});
 
-    axios.delete(url);
+    axios.delete(url)
+        .then((response) => {
+            EventBus.$emit("track-removed", response.track);
+        });
 }
