@@ -46,6 +46,7 @@ Vue.component('playlist', {
 
         unshuffle: function () {
             this.tracks = _.sortBy(this.tracks, (o) => o.created_at);
+            this.currentTrackIndex = _.indexOf(this.tracks, this.currentTrack);
         },
     }
 });
