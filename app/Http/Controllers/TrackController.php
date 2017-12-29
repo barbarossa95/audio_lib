@@ -43,7 +43,7 @@ class TrackController extends Controller
     {
         $track = Track::saveFromDropzone($request->track);
         if (!$track) response()->json(['error' => 'Error while trakc upload'], 503);
-        return response()->json(['track' => $track], 200);
+        return response()->json(compact('track'), 200);
     }
 
     /**
@@ -82,6 +82,6 @@ class TrackController extends Controller
             return response()->json(['error' => 'Track not found'], 404);
         }
         $track->deleteWithFile();
-        return response()->json(['track' => $track->id], 200);
+        return response()->json(compact('track'), 200);
     }
 }
