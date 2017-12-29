@@ -49,6 +49,7 @@ class Track extends Model
             return $track;
         }
         catch(Exeption $ex) {
+            \Log::error($ex);
             return null;
         }
     }
