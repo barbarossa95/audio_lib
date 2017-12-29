@@ -33,7 +33,6 @@ Vue.component('playlist', {
 
         trackRemoved: function (track) {
             if (track.id === this.currentTrack.id) this.getNext();
-            let index = _.indexOf(this.tracks, track);
             this.tracks = _.without(this.tracks, track);
         },
 
