@@ -1,19 +1,17 @@
 .playlist
     .error
         display none
+    ul
+        padding-right 40px
+        @media (max-width: 490px)
+            padding 0px
 
     &_item
         cursor pointer
-        &.active
+        list-style none
+        &.played
         &:hover
-            background: brand-success
-            background: -webkit-radial-gradient(brand-success, rgba(0,0,0,0))
-            background: -o-radial-gradient(brand-success, rgba(0,0,0,0))
-            background: -moz-radial-gradient(brand-success, rgba(0,0,0,0))
-            background: radial-gradient(brand-success, rgba(0,0,0,0))
-
-
-
+            background rgba(94, 90, 255, 0.5)
 
     .loader
         background #fff
