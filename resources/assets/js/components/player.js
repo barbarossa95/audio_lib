@@ -3,11 +3,12 @@ import Vue from 'vue'
 Vue.component('player', {
     data: function (){
         return {
-            as: null,
             player: null,
             track: null,
             isShufle: false,
             isRepeat: false,
+            isMuted: false,
+            isPlaying: false
         };
     },
 
@@ -15,8 +16,6 @@ Vue.component('player', {
         let that = this; // vue instance
 
         audiojs.events.ready(function() {
-            let $playlist = $(that.$refs.playlist);
-
             let as = audiojs.createAll({
                 trackEnded: that.playNext,
                 updatePlayhead: function(b) {
@@ -65,42 +64,29 @@ Vue.component('player', {
         },
 
         togglePlay: function (event) {
-            if (this.player.playing) {
-                this.player.pause();
-                this.$refs.play.classList.remove("glyphicon-pause");
-                this.$refs.play.classList.add("glyphicon-play");
-            } else {
-                this.player.play();
-                this.$refs.play.classList.remove("glyphicon-play");
-                this.$refs.play.classList.add("glyphicon-pause");
-            }
+            this.isPlaying = !this.player.playing;
+            if (!this.track) return this.playNext();
+            if (this.player.playing) this.player.pause();
+            else this.player.play();
         },
 
         toggleShuffle: function (event) {
-            if (this.isShufle) this.$refs.shuffle.parentNode.classList.remove('active');
-            else this.$refs.shuffle.parentNode.classList.add('active');
+            this.$refs
             this.isShufle = !this.isShufle;
         },
 
         toggleRepeat: function (event) {
-            if (this.isRepeat) this.$refs.repeat.parentNode.classList.remove('active');
-            else this.$refs.repeat.parentNode.classList.add('active');
             this.isRepeat = !this.isRepeat;
         },
 
         toggleMuted: function (event) {
-            if (this.player.element.volume != 0) {
-                this.player.setVolume(0);
-                this.$refs.mute.classList.remove("glyphicon-volume-up"); // TODO move to markup of the component
-                this.$refs.mute.classList.add("glyphicon-volume-off");
-            } else {
-                this.player.setVolume(1);
-                this.$refs.mute.classList.remove("glyphicon-volume-off");
-                this.$refs.mute.classList.add("glyphicon-volume-up");
-            }
+            if (this.isMuted) this.player.setVolume(1);
+            else this.player.setVolume(0);
+            this.isMuted = !this.isMuted;
         },
 
         trackSelected: function (track) {
+            if (!this.isPlaying) this.isPlaying = true;
             this.track = track;
         }
     }

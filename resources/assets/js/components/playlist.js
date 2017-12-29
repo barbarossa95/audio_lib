@@ -41,6 +41,7 @@ Vue.component('playlist', {
 
         shuffle: function () {
             this.tracks = _.shuffle(this.tracks);
+            this.currentTrackIndex = _.indexOf(this.tracks, this.currentTrack);
         },
 
         unshuffle: function () {
