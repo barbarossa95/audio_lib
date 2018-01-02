@@ -74,5 +74,9 @@ function trackRemoved(file) {
 
     let url = laroute.route('track.destroy', {track : file.id});
 
-    axios.delete(url);
+    axios.delete(url)
+        .then((e) => console.log(e))
+        .catch(() => {
+            return;
+        });
 }
