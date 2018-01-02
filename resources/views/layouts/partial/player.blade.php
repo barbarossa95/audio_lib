@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.partial.playlist')
+            @include('layouts.partial.playlist', ['ref' => 'playlist'])
         </div>
         <div ref="loader" class="loader"></div>
     </div>

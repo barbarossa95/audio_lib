@@ -45,22 +45,32 @@ Vue.component('player', {
         });
     },
 
+    watch: {
+        // whenever track changes, this function will start palying it
+        track: function (newTrack) {
+            this.player.pause();
+            this.player.load(newTrack.url);
+            this.player.play();
+        }
+    },
+
+
     methods: {
         playNext: function (event) {
-            this.player.pause();
+            this.track = this.$refs.playlist.getNext();
         },
 
         playPrev: function (event) {
-            this.player.pause();
+            this.track = this.$refs.playlist.getPrev();
         },
 
         togglePlay: function (event) {
             if (this.player.playing) {
-                this.player.pause(0);
+                this.player.pause();
                 this.$refs.play.classList.remove("glyphicon-pause");
                 this.$refs.play.classList.add("glyphicon-play");
             } else {
-                this.player.play(1);
+                this.player.play();
                 this.$refs.play.classList.remove("glyphicon-play");
                 this.$refs.play.classList.add("glyphicon-pause");
             }
@@ -81,7 +91,7 @@ Vue.component('player', {
         toggleMuted: function (event) {
             if (this.player.element.volume != 0) {
                 this.player.setVolume(0);
-                this.$refs.mute.classList.remove("glyphicon-volume-up");
+                this.$refs.mute.classList.remove("glyphicon-volume-up"); // TODO move to markup of the component
                 this.$refs.mute.classList.add("glyphicon-volume-off");
             } else {
                 this.player.setVolume(1);
@@ -92,8 +102,6 @@ Vue.component('player', {
 
         trackSelected: function (track) {
             this.track = track;
-            this.player.load(track.url);
-            this.player.play();
         }
     }
 });
