@@ -72,7 +72,7 @@ class Track extends Model
      */
     public function deleteWithFile()
     {
-        unlink($this->url);
+        unlink(public_path($this->url));
         $this->delete();
     }
 
