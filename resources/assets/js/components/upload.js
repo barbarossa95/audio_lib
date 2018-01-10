@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import { EventBus } from './event-bus.js'
+import store from './store'
+
 
 let $ = require('jquery');
 let tracksCount = 0;
@@ -24,9 +26,6 @@ $(document).ready(() => {
                 $modal.modal("show");
             });
     });
-
-    // $modal.on('hidden.bs.modal', function () {
-    // });
 });
 
 function initDropzone() {
@@ -64,7 +63,8 @@ function initDropzone() {
 function trackUploaded(file, response) {
     tracksCount++;
     file.id = response.track.id;
-    EventBus.$emit("track-uploaded", response.track);
+    // EventBus.$emit("track-uploaded", response.data.track);
+    store.commit('addTrack', response.data.track);
 }
 
 function trackRemoved(file) {
@@ -77,5 +77,8 @@ function trackRemoved(file) {
     let url = laroute.route('track.destroy', {track : file.id});
 
     axios.delete(url)
-        .then(response => EventBus.$emit("track-removed", response.track));
+        .then(response => {
+            //EventBus.$emit("track-removed", response.track);
+            store.commit('removeTrack', response.data.track);
+        });
 }

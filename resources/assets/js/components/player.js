@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from './store'
 
 Vue.component('player', {
     data: function (){
@@ -97,5 +98,6 @@ Vue.component('player', {
  * init Vue at the element
  */
 document.getElementById('js-vue-player') && new Vue({
-    el: '#js-vue-player'
+    el: '#js-vue-player',
+    store,
 })

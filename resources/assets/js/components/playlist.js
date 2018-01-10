@@ -4,45 +4,38 @@ import { EventBus } from './event-bus.js'
 Vue.component('playlist', {
     data: function (){
         return {
-            tracks: [],
-            currentTrack: null,
-            currentTrackIndex: -1,
         };
     },
     props: ['isPlaying'],
 
-    mounted () {
-        EventBus.$on('track-uploaded', this.trackUploaded);
-        EventBus.$on("track-removed", this.trackRemoved);
+    computed: {
+        tracks () {
+            return this.$store.state.tracks;
+        },
+        currentTrack () {
+            return this.$store.state.currentTrack;
+        },
+        currentTrackIndex () {
+            return this.$store.state.currentTrackIndex;
+        },
+    },
 
-        let url = laroute.route('track.index');
-        axios.get(url)
-            .then((response) => {
-                this.tracks = response.data;
-                this.$refs.loader.style.display = "none";
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    mounted () {
+        this.$store.dispatch('initStore', e => this.$refs.loader.style.display = "none");
     },
 
     methods: {
-        trackUploaded: function (track) {
-            this.tracks.push(track);
-        },
-
-        trackRemoved: function (track) {
-            if (track.id === this.currentTrack.id) this.getNext();
-            this.tracks = _.without(this.tracks, track);
+        removeTrack: function (track) {
+            if (track.id === this.currentTrack.id) this.getNextTrack();
+            this.$store.dispatch('removeTrack')
         },
 
         selectTrack: function (event, index, track) {
-            this.currentTrackIndex = index;
-            this.currentTrack = track;
+            this.$store.commit('selectTrack', { index, track });
             this.$emit('track-selected', track);
         },
 
-        getNext: function () {
+        getNextTrack: function () {
             if (++this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
             return this.currentTrack = this.tracks[this.currentTrackIndex];
         },
@@ -53,6 +46,8 @@ Vue.component('playlist', {
         },
 
         shuffle: function () {
+            this.$store.commit('shuffle');
+
             this.tracks = _.shuffle(this.tracks);
             this.currentTrackIndex = _.indexOf(this.tracks, this.currentTrack);
         },
