@@ -26,7 +26,7 @@ Vue.component('playlist', {
 
     methods: {
         removeTrack: function (track) {
-            if (track.id === this.currentTrack.id) this.getNextTrack();
+            if (track.id === this.currentTrack.id) this.getNext();
             this.$store.dispatch('removeTrack')
         },
 
@@ -35,9 +35,8 @@ Vue.component('playlist', {
             this.$emit('track-selected', track);
         },
 
-        getNextTrack: function () {
-            if (++this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
-            return this.currentTrack = this.tracks[this.currentTrackIndex];
+        getNext: function () {
+            this.$store.commit('getNext');
         },
 
         getPrev: function () {

@@ -14,7 +14,7 @@ export const mutations = {
     },
 
     removeTrack (state, track) {
-        if (track.id === state.currentTrack.id) state.currentTrack = getNext();
+
         state.tracks = _.without(state.tracks, track);
     },
 
@@ -34,8 +34,8 @@ export const mutations = {
     },
 
     getNext (state) {
-        if (++this.currentTrackIndex >= this.tracks.length) this.currentTrackIndex = 0;
-        return this.currentTrack = this.tracks[this.currentTrackIndex];
+        if (++state.currentTrackIndex >= state.tracks.length) state.currentTrackIndex = 0;
+        state.currentTrack = state.tracks[state.currentTrackIndex];
     },
 };
 
@@ -56,6 +56,9 @@ export const actions = {
         let url = laroute.route('track.destroy', {track : track.id});
 
         axios.delete(url)
-            .then(response => context.commit('removeTrack', track));
+            .then(response => {
+                if (track.id === state.currentTrack.id) context.commit('getNext');
+                context.commit('removeTrack', track)
+            });
     },
 };
