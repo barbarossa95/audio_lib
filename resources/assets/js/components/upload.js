@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import store from '../store'
+import Dropzone from 'dropzone'
 
-
-let $ = require('jquery');
+// let $ = require('jquery');
 let tracksCount = 0;
-
-var bus = new Vue();
 
 $(document).ready(() => {
     let $modal = $('#uploadModal'),
@@ -62,20 +60,12 @@ function initDropzone() {
 function trackUploaded(file, response) {
     tracksCount++;
     file.id = response.track.id;
-    store.commit('addTrack', response.data.track);
+    store.commit('addTrack', response.track);
 }
 
 function trackRemoved(file) {
     tracksCount--;
-
-    if (typeof (file.id) === 'undefined') {
-        return;
-    }
-
-    let url = laroute.route('track.destroy', {track : file.id});
-
-    axios.delete(url)
-        .then(response => {
-            store.commit('removeTrack', response.data.track);
-        });
+    let track = JSON.parse(file.xhr.response).track;
+    if (file.id !== track.id) return;
+    store.commit('removeTrack', track);
 }
