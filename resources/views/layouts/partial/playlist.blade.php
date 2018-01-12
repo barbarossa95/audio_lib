@@ -4,19 +4,20 @@
             <ul ref="playlist">
                 <li class="playlist_item clearfix"
                     v-for="track, index in tracks" :key="index"
-                    v-on:click="selectTrack($event, index, track)"
                     v-bind:class="{ 'played': index === currentTrackIndex }" >
                     <div class="pull-left">
                         <span class="playlist_item_playing glyphicon"
+                            v-on:click="selectTrack($event, index, track)"
                             v-bind:class="{
                                 'glyphicon-music': !(index === currentTrackIndex && isPlaying),
                                 'glyphicon-play': index === currentTrackIndex && isPlaying,
                             }" >
-                        <span>
+                        <span v-on:click="selectTrack($event, index, track)">
                             @{{ track.original_filename }}
                         </span>
                     </div>
-                    <span class="pull-right glyphicon glyphicon-option-horizontal"></span>
+                    <span v-on:click="options($event, index, track)"
+                        class="pull-right glyphicon glyphicon-option-horizontal"></span>
                 </li>
             </ul>
         </div>
