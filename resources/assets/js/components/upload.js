@@ -30,6 +30,7 @@ function initDropzone() {
         url: laroute.route('track.store'),
         paramName: 'track',
         maxFilesize: 20,
+        timeout: 3600000,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
