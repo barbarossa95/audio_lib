@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { EventBus } from './event-bus.js'
 
 Vue.component('playlist', {
     data: function (){

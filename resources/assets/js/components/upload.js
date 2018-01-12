@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { EventBus } from './event-bus.js'
 import store from './store'
 
 
@@ -63,7 +62,6 @@ function initDropzone() {
 function trackUploaded(file, response) {
     tracksCount++;
     file.id = response.track.id;
-    // EventBus.$emit("track-uploaded", response.data.track);
     store.commit('addTrack', response.data.track);
 }
 
@@ -78,7 +76,6 @@ function trackRemoved(file) {
 
     axios.delete(url)
         .then(response => {
-            //EventBus.$emit("track-removed", response.track);
             store.commit('removeTrack', response.data.track);
         });
 }
