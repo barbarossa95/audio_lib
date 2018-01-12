@@ -16,8 +16,20 @@
                             @{{ track.original_filename }}
                         </span>
                     </div>
-                    <span v-on:click="options($event, index, track)"
-                        class="pull-right glyphicon glyphicon-option-horizontal"></span>
+
+
+                    <div class="dropdown pull-right">
+                      <div class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span v-on:click="options($event, index, track)"
+                            data-toggle="dropdown"
+                            class="glyphicon glyphicon-option-horizontal"></span>
+                      </div>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <ul>
+                            <li><a v-on:click="removeTrack(track)" class="dropdown-item" href="#">Remove track</a></li>
+                        </ul>
+                      </div>
+                    </div>
                 </li>
             </ul>
         </div>
