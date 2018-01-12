@@ -56,11 +56,15 @@ Vue.component('player', {
 
     methods: {
         playNext: function (event) {
-            this.track = this.$refs.playlist.getNext();
+            if (!this.isPlaying) this.isPlaying = true;
+            this.$refs.playlist.getNext();
+            this.track = this.$store.getters.currentTrack;
         },
 
         playPrev: function (event) {
-            this.track = this.$refs.playlist.getPrev();
+            if (!this.isPlaying) this.isPlaying = true;
+            this.$refs.playlist.getPrev();
+            this.track = this.$store.getters.currentTrack;
         },
 
         togglePlay: function (event) {
