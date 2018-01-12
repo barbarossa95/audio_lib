@@ -16,7 +16,7 @@ export const actions = {
 
         axios.delete(url)
             .then(response => {
-                if (track.id === context.currentTrack.id) context.commit('getNext');
+                if (context.currentTrack && track.id === context.currentTrack.id) context.commit('getNext');
                 context.commit('removeTrack', track)
             });
     },
