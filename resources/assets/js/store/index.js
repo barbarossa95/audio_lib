@@ -1,11 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { state, mutations, actions } from './mutations'
+import { mutations } from './mutations'
+import { actions } from './actions'
+import { getters } from './getters'
 
 Vue.use(Vuex)
+
+export const state = {
+    tracks: [],
+    currentTrackIndex: -1,
+    currentTrack: null,
+};
 
 export default new Vuex.Store({
     state,
     mutations,
     actions,
+    getters,
 });
