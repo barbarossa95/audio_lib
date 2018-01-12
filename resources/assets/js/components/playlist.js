@@ -22,8 +22,7 @@ Vue.component('playlist', {
 
     methods: {
         removeTrack: function (track) {
-            if (track.id === this.currentTrack.id) this.getNext();
-            this.$store.dispatch('removeTrack')
+            this.$store.dispatch('removeTrack', track)
         },
 
         selectTrack: function (event, index, track) {
@@ -32,7 +31,7 @@ Vue.component('playlist', {
         },
 
         options: function (event, index, track) {
-            console.log(track);
+            $(event.target).parent().dropdown();
         },
 
         getNext: function () {
