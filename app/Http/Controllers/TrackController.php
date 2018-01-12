@@ -42,7 +42,7 @@ class TrackController extends Controller
     public function store(Request $request)
     {
         $track = Track::saveFromDropzone($request->track);
-        if (!$track) response()->json(['error' => 'Error while trakc upload'], 503);
+        if (empty($track)) return response()->json(['error' => 'Error while trakc upload'], 503);
         return response()->json(compact('track'), 200);
     }
 
