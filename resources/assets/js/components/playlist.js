@@ -1,10 +1,7 @@
 import Vue from 'vue'
 
 Vue.component('playlist', {
-    data: function (){
-        return {
-        };
-    },
+
     props: ['isPlaying'],
 
     computed: {
@@ -34,25 +31,24 @@ Vue.component('playlist', {
             this.$emit('track-selected', track);
         },
 
+        options: function (event, index, track) {
+            console.log(track);
+        },
+
         getNext: function () {
             this.$store.commit('getNext');
         },
 
         getPrev: function () {
-            if (--this.currentTrackIndex < 0) this.currentTrackIndex = this.tracks.length-1;
-            return this.currentTrack = this.tracks[this.currentTrackIndex];
+            this.$store.commit('getPrev');
         },
 
         shuffle: function () {
             this.$store.commit('shuffle');
-
-            this.tracks = _.shuffle(this.tracks);
-            this.currentTrackIndex = _.indexOf(this.tracks, this.currentTrack);
         },
 
         unshuffle: function () {
-            this.tracks = _.sortBy(this.tracks, (o) => o.created_at);
-            this.currentTrackIndex = _.indexOf(this.tracks, this.currentTrack);
+            this.$store.commit('unshuffle');
         },
     }
 });
