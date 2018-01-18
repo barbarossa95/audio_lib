@@ -64,5 +64,4 @@ function trackRemoved(file) {
     if (!file.id) return;
     let track = store.getters.getTrackById(file.id);
     store.dispatch('removeTrack', track);
-    // store.commit('removeTrack', track);
 }
