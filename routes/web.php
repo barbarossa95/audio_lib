@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/tracks', 'TrackController@getTracksView');
 
+    Route::get('/profile', 'UserController@getProfile');
+
     Route::middleware('ajax')->resource('track', 'TrackController', ['except' => [
         'edit'
     ]]);
