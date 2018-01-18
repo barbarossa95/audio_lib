@@ -60,7 +60,6 @@ Vue.component('player', {
         }
     },
 
-
     methods: {
         playNext: function (event) {
             if (!this.isPlaying) this.isPlaying = true;
