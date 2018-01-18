@@ -22,15 +22,16 @@ class Track extends Model
     ];
 
     /**
-     * Save file from dropzone uploading to storage
+     * Save track from dropzone uploading to storage
      *
      * @param \Illuminate\Http\UploadedFile $file
      * @return string $file
      */
     public static function saveFromDropzone($file)
     {
+        $userId = \Auth::user()->id;
         $extension = $file->extension();
-        $directory = 'uploads/tracks';
+        $directory = "uploads/tracks/user$userId";
         $path = public_path($directory);
         if (!is_dir($path)) mkdir($path, 0777, true);
         $filename = self::generateUniqueName($file->getFilename());
