@@ -39,16 +39,21 @@ class User extends Authenticatable
      */
     public function newInvite()
     {
-        $length = 10;
-        $inviteCode = "";
-        $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
-        for ($p = 0; $p < self::$inviteLength; $p++) {
-            $inviteCode .= $characters[mt_rand(10, strlen($characters))];
-        }
-
+        $inviteCode = substr(md5(microtime()), 0, self::$inviteLength);
         $this->invite = $inviteCode;
         $this->save();
-
         return $inviteCode;
+    }
+
+    /**
+     * Get User tracks
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tracks()
+    {
+        return $this->belongsToMany('App\Models\Track')
+            ->withPivot('added_at')
+            ->orderBy("user_track.added_at", "desc");
     }
 }
