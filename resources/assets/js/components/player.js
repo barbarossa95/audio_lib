@@ -102,7 +102,3 @@ Vue.component('player', {
         }
     }
 });
-
-/**
- * init Vue at the element
- */
