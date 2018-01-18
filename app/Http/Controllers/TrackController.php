@@ -19,7 +19,7 @@ class TrackController extends Controller
      */
     public function index(Request $request)
     {
-        $tracks = Track::all();
+        $tracks = $request->user()->tracks;
         return $tracks;
     }
 
@@ -41,8 +41,10 @@ class TrackController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
         $track = Track::saveFromDropzone($request->track);
         if (empty($track)) return response()->json(['error' => 'Error while trakc upload'], 503);
+        $user->tracks()->attach($track);
         return response()->json(compact('track'), 200);
     }
 
@@ -77,10 +79,12 @@ class TrackController extends Controller
      */
     public function destroy($id)
     {
+        $user = \Auth::user();
         $track = Track::find($id);
         if (empty($track)) {
             return response()->json(['error' => 'Track not found'], 404);
         }
+        $user->tracks()->detach($track);
         $track->deleteWithFile();
         return response()->json(compact('track'), 200);
     }
