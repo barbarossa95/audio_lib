@@ -52,7 +52,7 @@ class User extends Authenticatable
      */
     public function tracks()
     {
-        return $this->belongsToMany('App\Models\Track')
+        return $this->belongsToMany('App\Models\Track', 'user_track')
             ->withPivot('added_at')
             ->orderBy("user_track.added_at", "desc");
     }
