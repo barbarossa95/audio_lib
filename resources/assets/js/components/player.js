@@ -17,7 +17,15 @@ Vue.component('player', {
 
         audiojs.events.ready(function() {
             let as = audiojs.createAll({
-                trackEnded: that.playNext,
+                trackEnded: function() {
+                    console.log(this);
+                    if (!that.isRepeat) {
+                        that.playNext();
+                        return;
+                    }
+                    this.element.currentTime = 0;
+                    this.play();
+                },
                 updatePlayhead: function(b) {
                     let palyed = that.$refs.played
                       , a = this.settings.createPlayer
